@@ -2,7 +2,7 @@ Add-Type -AssemblyName System.Windows.Forms
 Add-Type -AssemblyName System.Drawing
 
 $Scripts = @(
-    @{ Name = "Lab. Informática | Aluno(a)"; Url = "https://raw.githubusercontent.com/USER/REPO/scripts/lab.ps1" }
+    @{ Name = "Lab. Informática | Aluno(a)"; Url = "cataratas.github.io/GPO/scripts/lab.ps1" }
 )
 
 $form = New-Object System.Windows.Forms.Form
