@@ -76,4 +76,4 @@ New-ItemProperty `
 -Force
 
 reg unload HKU\TempHive
-
+[System.Windows.Forms.MessageBox]::Show("As politicas foram aplicadas com sucesso para o perfil de aluno(a).")
