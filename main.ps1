@@ -33,7 +33,7 @@ foreach ($script in $Scripts) {
     $button.Size = New-Object System.Drawing.Size(320,40)
     $button.Location = New-Object System.Drawing.Point(30,$y)
 
-    $url = $script.Url
+    $button.Tag = $script.Url
 
     $button.Add_Click({
         try {
