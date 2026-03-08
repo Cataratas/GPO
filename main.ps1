@@ -40,7 +40,7 @@ foreach ($script in $Scripts) {
             irm $url | iex
         }
         catch {
-            [System.Windows.Forms.MessageBox]::Show("Failed to run script")
+            [System.Windows.Forms.MessageBox]::Show($_.Exception.Message)
         }
     })
 
