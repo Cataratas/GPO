@@ -19,6 +19,15 @@ New-ItemProperty `
 -Value 0 `
 -Force
 
+# Browser Signin
+New-Item -Path "HKU:\TempHive\Software\Policies\Google\Chrome\BrowserSignin" -Force | Out-Null
+New-ItemProperty `
+-Path "HKU:\TempHive\Software\Policies\Google\Chrome" `
+-Name "BrowserSignin" `
+-PropertyType DWord `
+-Value 0 `
+-Force
+
 # Clear Data on Exit
 New-Item -Path "HKU:\TempHive\Software\Policies\Google\Chrome\ClearBrowsingDataOnExitList" -Force | Out-Null
 New-ItemProperty `
