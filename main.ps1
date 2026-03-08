@@ -37,7 +37,13 @@ foreach ($script in $Scripts) {
 
     $button.Add_Click({
         try {
-            irm $url | iex
+            $temp = Join-Path $env:TEMP ("deploy_" + [guid]::NewGuid() + ".ps1")
+            Invoke-WebRequest $url -OutFile $temp
+
+            Start-Process powershell.exe `
+                -ArgumentList "-ExecutionPolicy Bypass -File `"$temp`"" `
+                -WindowStyle Normal
+
         }
         catch {
             [System.Windows.Forms.MessageBox]::Show($_.Exception.Message)
@@ -49,4 +55,7 @@ foreach ($script in $Scripts) {
     $y += 50
 }
 
+$form.Add_FormClosing({
+    [System.Environment]::Exit(0)
+})
 $form.ShowDialog()
