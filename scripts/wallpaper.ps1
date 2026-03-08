@@ -41,20 +41,17 @@ $pic.Height = 110
 $pic.Margin = 10
 
 $pic.Tag = $url
-
 $pic.Add_Click({
+    $Wallpaper = $this.Tag
+    $FileName = Split-Path $Wallpaper -Leaf
+    $Destination = "C:\Windows\Web\Wallpaper\$FileName"
 
-$Wallpaper = $this.Tag
-$FileName = Split-Path $Wallpaper -Leaf
-$Destination = "C:\Windows\Web\Wallpaper\$FileName"
+    Invoke-WebRequest $Wallpaper -OutFile $Destination
 
-Invoke-WebRequest $Wallpaper -OutFile $Destination
+    Set-ItemProperty "HKCU:\Control Panel\Desktop" WallpaperStyle 10
+    Set-ItemProperty "HKCU:\Control Panel\Desktop" TileWallpaper 0
 
-Set-ItemProperty "HKCU:\Control Panel\Desktop" WallpaperStyle 10
-Set-ItemProperty "HKCU:\Control Panel\Desktop" TileWallpaper 0
-
-[Wallpaper]::SystemParametersInfo(20,0,$Destination,3)
-
+    [Wallpaper]::SystemParametersInfo(20,0,$Destination,3)
 })
 
 $panel.Controls.Add($pic)
