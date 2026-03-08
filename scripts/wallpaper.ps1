@@ -9,7 +9,7 @@ if (-not ([Security.Principal.WindowsPrincipal] `
     -ArgumentList "-ExecutionPolicy Bypass -File `"$PSCommandPath`"" `
     -Verb RunAs
 
-    exit
+    return
 }
 
 $Wallpapers = @(
