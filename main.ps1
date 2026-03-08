@@ -1,13 +1,11 @@
 $ScriptUrl = "https://cataratas.github.io/GPO/main.ps1"
 
-if (-not ([Security.Principal.WindowsPrincipal] `
-[Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole(`
-[Security.Principal.WindowsBuiltInRole]::Administrator)) {
+$isAdmin = ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)
 
+if (-not $isAdmin -or $env:GPO_LAUNCH -ne "1") {
     Start-Process powershell.exe `
         -Verb RunAs `
-        -ArgumentList "-ExecutionPolicy Bypass -Command `"irm $ScriptUrl | iex`""
-
+        -ArgumentList "-ExecutionPolicy Bypass -Command `$env:GPO_LAUNCH='1'; irm $ScriptUrl | iex"
     return
 }
 
