@@ -1,17 +1,6 @@
 Add-Type -AssemblyName System.Windows.Forms
 Add-Type -AssemblyName System.Drawing
 
-if (-not ([Security.Principal.WindowsPrincipal] `
-[Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole(`
-[Security.Principal.WindowsBuiltInRole]::Administrator)) {
-
-    Start-Process powershell.exe `
-    -ArgumentList "-ExecutionPolicy Bypass -File `"$PSCommandPath`"" `
-    -Verb RunAs
-
-    return
-}
-
 $Wallpapers = @(
 "https://cataratas.github.io/GPO/assets/wallpaper_orange.jpeg",
 "https://cataratas.github.io/GPO/assets/wallpaper_blue.jpeg"
