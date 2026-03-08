@@ -50,11 +50,12 @@ New-ItemProperty `
 -Force
 
 # Set Wallpaper
+Invoke-WebRequest "https://cataratas.github.io/GPO/assets/wallpaper_orange.jpeg" -OutFile "C:\Windows\Web\Wallpaper\wallpaper_orange.jpeg"
 New-ItemProperty `
 -Path "HKU:\TempHive\Software\Microsoft\Windows\CurrentVersion\Policies\System" `
 -Name "Wallpaper" `
 -PropertyType String `
--Value "C:\Windows\Web\Wallpaper\wallpaper1.jpeg" `
+-Value "C:\Windows\Web\Wallpaper\wallpaper_orange.jpeg" `
 -Force
 
 # (2 = stretch, 0 = center, 6 = fit, 10 = fill)
