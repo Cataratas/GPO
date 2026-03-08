@@ -58,6 +58,6 @@ $panel.Controls.Add($pic)
 }
 
 $form.Add_FormClosing({
-    Stop-Process $PID
+    [System.Windows.Forms.Application]::Exit()
 })
 $form.ShowDialog()
