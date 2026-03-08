@@ -20,14 +20,13 @@ $Scripts = @(
 )
 
 $form = New-Object System.Windows.Forms.Form
-$form.Text = "Lab Deployment Tool"
+$form.Text = "Cólegio Exponencial - GPO"
 $form.Size = New-Object System.Drawing.Size(400,300)
 $form.StartPosition = "CenterScreen"
 
 $y = 20
 
 foreach ($script in $Scripts) {
-
     $button = New-Object System.Windows.Forms.Button
     $button.Text = $script.Name
     $button.Size = New-Object System.Drawing.Size(320,40)
@@ -57,6 +56,6 @@ foreach ($script in $Scripts) {
 }
 
 $form.Add_FormClosing({
-    Stop-Process $PID
+    [System.Windows.Forms.Application]::Exit()
 })
 $form.ShowDialog()
