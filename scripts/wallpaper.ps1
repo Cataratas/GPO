@@ -3,7 +3,8 @@ Add-Type -AssemblyName System.Drawing
 
 $Wallpapers = @(
     "https://cataratas.github.io/Exponencial-GPO/assets/wallpaper_orange.jpeg",
-    "https://cataratas.github.io/Exponencial-GPO/assets/wallpaper_blue.jpeg"
+    "https://cataratas.github.io/Exponencial-GPO/assets/wallpaper_blue.jpeg",
+    "https://cataratas.github.io/Exponencial-GPO/assets/wallpaper_dark_gray.jpeg"
 )
 
 $form = New-Object Windows.Forms.Form
@@ -26,9 +27,7 @@ public static extern bool SystemParametersInfo(int uAction, int uParam, string l
 "@
 
 foreach ($url in $Wallpapers) {
-
     $file = Join-Path $env:TEMP (Split-Path $url -Leaf)
-
     Invoke-WebRequest $url -OutFile $file
 
     $pic = New-Object Windows.Forms.PictureBox
