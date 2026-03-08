@@ -1,32 +1,74 @@
 Add-Type -AssemblyName System.Windows.Forms
+Add-Type -AssemblyName System.Drawing
+
+if (-not ([Security.Principal.WindowsPrincipal] `
+[Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole(`
+[Security.Principal.WindowsBuiltInRole]::Administrator)) {
+
+    Start-Process powershell.exe `
+    -ArgumentList "-ExecutionPolicy Bypass -File `"$PSCommandPath`"" `
+    -Verb RunAs
+
+    exit
+}
 
 $Wallpapers = @(
-    "cataratas.github.io/GPO/assets\wallpaper_orange.jpeg",
-    "cataratas.github.io/GPO/assets\wallpaper_blue.jpeg"
+"https://cataratas.github.io/GPO/assets/wallpaper_orange.jpeg",
+"https://cataratas.github.io/GPO/assets/wallpaper_blue.jpeg"
 )
 
 $form = New-Object Windows.Forms.Form
 $form.Text = "Select Wallpaper"
-$form.Size = "400,300"
+$form.Size = New-Object Drawing.Size(600,400)
+$form.StartPosition = "CenterScreen"
 
-$list = New-Object Windows.Forms.ListBox
-$list.Dock = "Fill"
-$list.Items.AddRange($Wallpapers)
+$panel = New-Object Windows.Forms.FlowLayoutPanel
+$panel.Dock = "Fill"
+$panel.AutoScroll = $true
 
-$button = New-Object Windows.Forms.Button
-$button.Text = "Apply"
-$button.Dock = "Bottom"
+$form.Controls.Add($panel)
 
-$button.Add_Click({
-    $Wallpaper = $list.SelectedItem
+# Windows API for wallpaper change
+Add-Type @"
+using System.Runtime.InteropServices;
+public class Wallpaper {
+[DllImport("user32.dll", SetLastError=true)]
+public static extern bool SystemParametersInfo(int uAction, int uParam, string lpvParam, int fuWinIni);
+}
+"@
 
-    Copy-Item $Wallpaper "C:\Windows\Web\Wallpaper\" -Force
+foreach ($url in $Wallpapers) {
 
-    Set-ItemProperty -Path "HKCU:\Control Panel\Desktop" -Name Wallpaper -Value $Wallpaper
-    rundll32.exe user32.dll, UpdatePerUserSystemParameters
+$file = Join-Path $env:TEMP (Split-Path $url -Leaf)
+
+# Download preview image
+Invoke-WebRequest $url -OutFile $file
+
+$pic = New-Object Windows.Forms.PictureBox
+$pic.Image = [Drawing.Image]::FromFile($file)
+$pic.SizeMode = "Zoom"
+$pic.Width = 180
+$pic.Height = 110
+$pic.Margin = 10
+
+$pic.Tag = $url
+
+$pic.Add_Click({
+
+$Wallpaper = $this.Tag
+$FileName = Split-Path $Wallpaper -Leaf
+$Destination = "C:\Windows\Web\Wallpaper\$FileName"
+
+Invoke-WebRequest $Wallpaper -OutFile $Destination
+
+Set-ItemProperty "HKCU:\Control Panel\Desktop" WallpaperStyle 10
+Set-ItemProperty "HKCU:\Control Panel\Desktop" TileWallpaper 0
+
+[Wallpaper]::SystemParametersInfo(20,0,$Destination,3)
+
 })
 
-$form.Controls.Add($list)
-$form.Controls.Add($button)
+$panel.Controls.Add($pic)
+}
 
 $form.ShowDialog()
