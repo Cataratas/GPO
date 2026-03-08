@@ -1,8 +1,21 @@
+$ScriptUrl = "https://cataratas.github.io/GPO/main.ps1"
+
+if (-not ([Security.Principal.WindowsPrincipal] `
+[Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole(`
+[Security.Principal.WindowsBuiltInRole]::Administrator)) {
+
+    Start-Process powershell.exe `
+        -Verb RunAs `
+        -ArgumentList "-ExecutionPolicy Bypass -Command `"irm $ScriptUrl | iex`""
+
+    return
+}
+
 Add-Type -AssemblyName System.Windows.Forms
 Add-Type -AssemblyName System.Drawing
 
 $Scripts = @(
-    @{ Name = "Lab. Informática | Aluno(a)"; Url = "cataratas.github.io/GPO/scripts/lab.ps1" }
+    @{ Name = "Lab. Informatica | Aluno(a)"; Url = "cataratas.github.io/GPO/scripts/lab.ps1" }
     @{ Name = "Wallpapers"; Url = "cataratas.github.io/GPO/scripts/wallpaper.ps1" }
 )
 
