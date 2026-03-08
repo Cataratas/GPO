@@ -10,6 +10,15 @@ New-ItemProperty `
 -Value 0 `
 -Force
 
+# Guest mode
+New-Item -Path "HKU:\TempHive\Software\Policies\Google\Chrome\BrowserGuestModeEnabled" -Force | Out-Null
+New-ItemProperty `
+-Path "HKU:\TempHive\Software\Policies\Google\Chrome" `
+-Name "BrowserGuestModeEnabled" `
+-PropertyType DWord `
+-Value 0 `
+-Force
+
 # Clear Data on Exit
 New-Item -Path "HKU:\TempHive\Software\Policies\Google\Chrome\ClearBrowsingDataOnExitList" -Force | Out-Null
 New-ItemProperty `
