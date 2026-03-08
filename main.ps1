@@ -37,6 +37,7 @@ foreach ($script in $Scripts) {
 
     $button.Add_Click({
         try {
+            $url = $this.Tag
             $temp = Join-Path $env:TEMP ("deploy_" + [guid]::NewGuid() + ".ps1")
             Invoke-WebRequest $url -OutFile $temp
 
