@@ -87,8 +87,8 @@ New-ItemProperty `
 reg unload HKU\TempHive
 Add-Type -AssemblyName System.Windows.Forms
 [System.Windows.Forms.MessageBox]::Show(
-        "As políticas foram aplicadas com sucesso para o perfil de aluno(a).",
-        "Colégio Exponencial - GPO",
+        "As politicas foram aplicadas com sucesso para o perfil de aluno(a).",
+        "Colegio Exponencial - GPO",
         [System.Windows.Forms.MessageBoxButtons]::OK,
         [System.Windows.Forms.MessageBoxIcon]::Information
 )

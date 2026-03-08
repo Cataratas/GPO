@@ -18,7 +18,7 @@ $Scripts = @(
 )
 
 $form = New-Object System.Windows.Forms.Form
-$form.Text = "Cólegio Exponencial - GPO"
+$form.Text = "Colegio Exponencial - GPO"
 $form.Size = New-Object System.Drawing.Size(400,300)
 $form.StartPosition = "CenterScreen"
 
