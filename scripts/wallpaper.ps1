@@ -28,7 +28,9 @@ public static extern bool SystemParametersInfo(int uAction, int uParam, string l
 
 foreach ($url in $Wallpapers) {
     $file = Join-Path $env:TEMP (Split-Path $url -Leaf)
-    Invoke-WebRequest $url -OutFile $file
+    if (!(Test-Path $file)) {
+        Invoke-WebRequest $url -OutFile $file
+    }
 
     $pic = New-Object Windows.Forms.PictureBox
     $pic.Image = [Drawing.Image]::FromFile($file)
