@@ -1,3 +1,4 @@
+Invoke-WebRequest "https://nti-exponencial.github.io/gpo/scripts/selectUser.ps1" -OutFile "$env:TEMP/selectUser.ps1"
 . "$PSScriptRoot\selectUser.ps1"
 New-PSDrive -Name HKU -PSProvider Registry -Root HKEY_USERS
 
