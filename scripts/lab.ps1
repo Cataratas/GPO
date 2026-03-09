@@ -37,10 +37,10 @@ New-ItemProperty -Path "HKU:\TempHive\Software\Policies\Google\Chrome\ClearBrows
     -Name "8" -PropertyType String -Value "hosted_app_data" -Force
 
 # Set Wallpaper
-Invoke-WebRequest "https://nti-exponencial.github.io/gpo/assets/wallpaper_orange.jpg" -OutFile "C:\Windows\Web\Wallpaper\wallpaper_orange.jpg"
+Invoke-WebRequest "https://nti-exponencial.github.io/gpo/assets/wallpaper_orange.jpeg" -OutFile "C:\Windows\Web\Wallpaper\wallpaper_orange.jpeg"
 New-Item -Path "HKU:\TempHive\Software\Microsoft\Windows\CurrentVersion\Policies\System" -Force | Out-Null
 New-ItemProperty -Path "HKU:\TempHive\Software\Microsoft\Windows\CurrentVersion\Policies\System" `
-    -Name "Wallpaper" -PropertyType String -Value "C:\Windows\Web\Wallpaper\wallpaper_orange.jpg" -Force
+    -Name "Wallpaper" -PropertyType String -Value "C:\Windows\Web\Wallpaper\wallpaper_orange.jpeg" -Force
 
 # (2 = stretch, 0 = center, 6 = fit, 10 = fill)
 New-ItemProperty -Path "HKU:\TempHive\Software\Microsoft\Windows\CurrentVersion\Policies\System" `
