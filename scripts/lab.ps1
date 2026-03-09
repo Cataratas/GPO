@@ -5,7 +5,7 @@ Where-Object { $_.ProfileImagePath -like "*Aluno(a)" }
 
 $sid = $profile.PSChildName
 $profilePath = $profile.ProfileImagePath
-
+Write-Host $profilePath
 reg load HKU\TempHive "$profilePath\NTUSER.DAT"
 
 # Browser History
