@@ -1,5 +1,11 @@
 New-PSDrive -Name HKU -PSProvider Registry -Root HKEY_USERS
-reg load HKU\TempHive "C:\Users\Aluno(a)\NTUSER.DAT"
+
+$sid = (New-Object System.Security.Principal.NTAccount("Aluno(a)")).
+       Translate([System.Security.Principal.SecurityIdentifier]).Value
+
+# Get profile path
+$profilePath = (Get-ItemProperty "HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\ProfileList\$sid").ProfileImagePath
+reg load HKU\TempHive "$profilePath\NTUSER.DAT"
 
 # Browser History
 New-Item -Path "HKU:\TempHive\Software\Policies\Google\Chrome\AllowDeletingBrowserHistory" -Force | Out-Null
