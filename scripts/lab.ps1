@@ -25,7 +25,7 @@ New-ItemProperty -Path "HKU:\TempHive\Software\Policies\Google\Chrome" `
 New-Item -Path "HKU:\TempHive\Software\Policies\Google\Chrome\ClearBrowsingDataOnExitList" -Force | Out-Null
 New-ItemProperty -Path "HKU:\TempHive\Software\Policies\Google\Chrome\ClearBrowsingDataOnExitList" `
     -Name "3" -PropertyType String -Value "cookies_and_other_site_data" -Force
-New-ItemProperty -Path "HHKU:\TempHive\Software\Policies\Google\Chrome\ClearBrowsingDataOnExitList" `
+New-ItemProperty -Path "HKU:\TempHive\Software\Policies\Google\Chrome\ClearBrowsingDataOnExitList" `
     -Name "4" -PropertyType String -Value "cached_images_and_files" -Force
 New-ItemProperty -Path "HKU:\TempHive\Software\Policies\Google\Chrome\ClearBrowsingDataOnExitList" `
     -Name "5" -PropertyType String -Value "password_signin" -Force
