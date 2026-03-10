@@ -18,8 +18,8 @@ New-ItemProperty -Path "HKU:\TempHive\Software\Policies\Google\Chrome" `
     -Name "BrowserGuestModeEnabled" -PropertyType DWord -Value 0 -Force
 
 # Disable add person
-New-ItemProperty -Path "HKU:\TempHive\Software\Policies\Google\Chrome" 
--Name "BrowserAddPersonEnabled" -PropertyType DWord -Value 0 -Force
+New-ItemProperty -Path "HKU:\TempHive\Software\Policies\Google\Chrome" `
+    -Name "BrowserAddPersonEnabled" -PropertyType DWord -Value 0 -Force
 
 # Browser Signin
 New-ItemProperty -Path "HKU:\TempHive\Software\Policies\Google\Chrome" `
