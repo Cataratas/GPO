@@ -7,6 +7,10 @@ if ($null -eq $profilePath) {
     return
 }
 reg load HKU\TempHive "$profilePath\NTUSER.DAT"
+$username = Split-Path $profilePath -Leaf
+
+Set-LocalUser -Name $username -PasswordNeverExpires $true
+net user $username /PasswordChg:No
 
 New-Item -Path "HKU:\TempHive\Software\Policies\Google\Chrome\" -Force | Out-Null
 # Browser History
@@ -59,6 +63,8 @@ New-ItemProperty -Path "HKU:\TempHive\Software\Policies\Microsoft\Internet Explo
 New-Item -Path "HKU:\TempHive\Software\Policies\Microsoft\Edge" -Force | Out-Null
 New-ItemProperty -Path "HKU:\TempHive\Software\Policies\Microsoft\Edge" `
     -Name "AllowDeletingBrowserHistory" -PropertyType DWord -Value 1 -Force
+
+
 
 [gc]::Collect()
 [gc]::WaitForPendingFinalizers()
