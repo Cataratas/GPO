@@ -75,7 +75,7 @@ New-ItemProperty `
     -Path "HKU:\TempHive\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer" `
     -Name "SettingsPageVisibility" `
     -PropertyType String `
-    -Value "hide:regionlanguage;language;keyboard;speech" `
+    -Value "hide:regionlanguage;language;keyboard" `
     -Force
 
 [gc]::Collect()

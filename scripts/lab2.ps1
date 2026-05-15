@@ -60,6 +60,15 @@ New-Item -Path "HKU:\TempHive\Software\Policies\Microsoft\Edge" -Force | Out-Nul
 New-ItemProperty -Path "HKCU:\Software\Policies\Microsoft\Edge" `
     -Name "AllowDeletingBrowserHistory" -PropertyType DWord -Value 1 -Force
 
+New-Item -Path "HKU:\TempHive\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer" -Force | Out-Null
+# Esconde páginas de idioma
+New-ItemProperty `
+    -Path "HKU:\TempHive\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer" `
+    -Name "SettingsPageVisibility" `
+    -PropertyType String `
+    -Value "hide:regionlanguage;language;keyboard" `
+    -Force
+
 [gc]::Collect()
 [gc]::WaitForPendingFinalizers()
 reg unload HKU\TempHive
