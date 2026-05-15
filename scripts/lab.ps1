@@ -7,10 +7,12 @@ if ($null -eq $profilePath) {
     return
 }
 reg load HKU\TempHive "$profilePath\NTUSER.DAT"
-$username = Split-Path $profilePath -Leaf
+# $username = Split-Path $profilePath -Leaf
+# Set-LocalUser -Name $username -PasswordNeverExpires $true
+# net user $username /PasswordChg:No
 
-Set-LocalUser -Name $username -PasswordNeverExpires $true
-net user $username /PasswordChg:No
+Set-LocalUser -Name 'Aluno(a)' -PasswordNeverExpires $true
+net user 'Aluno(a)' /PasswordChg:No
 
 New-Item -Path "HKU:\TempHive\Software\Policies\Google\Chrome\" -Force | Out-Null
 # Browser History
