@@ -69,10 +69,10 @@ New-Item -Path "HKU:\TempHive\Software\Policies\Microsoft\Edge" -Force | Out-Nul
 New-ItemProperty -Path "HKU:\TempHive\Software\Policies\Microsoft\Edge" `
     -Name "AllowDeletingBrowserHistory" -PropertyType DWord -Value 1 -Force
 
-New-Item -Path "HKLM:\SOFTWARE\Policies\Microsoft\Control Panel\International" -Force | Out-Null
+New-Item -Path "HKU:\SOFTWARE\Policies\Microsoft\Control Panel\International" -Force | Out-Null
 # Bloqueia alteração de idioma/região
 New-ItemProperty `
-    -Path "HKLM:\SOFTWARE\Policies\Microsoft\Control Panel\International" `
+    -Path "HKU:\SOFTWARE\Policies\Microsoft\Control Panel\International" `
     -Name "BlockUserInputMethodsForSignIn" `
     -PropertyType DWord `
     -Value 1 `
