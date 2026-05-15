@@ -53,12 +53,7 @@ New-ItemProperty -Path "HKU:\TempHive\Software\Microsoft\Windows\CurrentVersion\
     -Name "Wallpaper" -PropertyType String -Value "C:\Windows\Web\Wallpaper\wallpaper_orange.jpeg" -Force
 
 New-Item -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\Personalization" -Force | Out-Null
-New-ItemProperty `
--Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\Personalization" `
--Name "NoChangingLockScreen" `
--PropertyType DWord `
--Value 1 `
--Force | Out-Null
+New-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\Personalization" -Name "NoChangingLockScreen" -PropertyType DWord -Value 1 -Force | Out-Null
 
 # (2 = stretch, 0 = center, 6 = fit, 10 = fill)
 New-ItemProperty -Path "HKU:\TempHive\Software\Microsoft\Windows\CurrentVersion\Policies\System" `
@@ -74,7 +69,14 @@ New-Item -Path "HKU:\TempHive\Software\Policies\Microsoft\Edge" -Force | Out-Nul
 New-ItemProperty -Path "HKU:\TempHive\Software\Policies\Microsoft\Edge" `
     -Name "AllowDeletingBrowserHistory" -PropertyType DWord -Value 1 -Force
 
-
+New-Item -Path "HKLM:\SOFTWARE\Policies\Microsoft\Control Panel\International" -Force | Out-Null
+# Bloqueia alteração de idioma/região
+New-ItemProperty `
+    -Path "HKLM:\SOFTWARE\Policies\Microsoft\Control Panel\International" `
+    -Name "BlockUserInputMethodsForSignIn" `
+    -PropertyType DWord `
+    -Value 1 `
+    -Force | Out-Null
 
 [gc]::Collect()
 [gc]::WaitForPendingFinalizers()
