@@ -52,6 +52,13 @@ New-Item -Path "HKU:\TempHive\Software\Microsoft\Windows\CurrentVersion\Policies
 New-ItemProperty -Path "HKU:\TempHive\Software\Microsoft\Windows\CurrentVersion\Policies\System" `
     -Name "Wallpaper" -PropertyType String -Value "C:\Windows\Web\Wallpaper\wallpaper_orange.jpeg" -Force
 
+New-ItemProperty `
+-Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\Personalization" `
+-Name "NoChangingLockScreen" `
+-PropertyType DWord `
+-Value 1 `
+-Force | Out-Null
+
 # (2 = stretch, 0 = center, 6 = fit, 10 = fill)
 New-ItemProperty -Path "HKU:\TempHive\Software\Microsoft\Windows\CurrentVersion\Policies\System" `
     -Name "WallpaperStyle" -PropertyType String -Value "2" -Force
