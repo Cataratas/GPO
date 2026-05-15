@@ -69,13 +69,13 @@ New-Item -Path "HKU:\TempHive\Software\Policies\Microsoft\Edge" -Force | Out-Nul
 New-ItemProperty -Path "HKU:\TempHive\Software\Policies\Microsoft\Edge" `
     -Name "AllowDeletingBrowserHistory" -PropertyType DWord -Value 1 -Force
 
-New-Item -Path "HKU:\TempHive\SOFTWARE\Policies\Microsoft\Control Panel\International" -Force | Out-Null
-# Bloqueia alteração de idioma/região
+New-Item -Path "HKU:\TempHive\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer" -Force | Out-Null
+# Esconde páginas de idioma
 New-ItemProperty `
-    -Path "HKU:\TempHive\SOFTWARE\Policies\Microsoft\Control Panel\International" `
-    -Name "BlockUserInputMethodsForSignIn" `
-    -PropertyType DWord `
-    -Value 1 `
+    -Path "HKU:\TempHive\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer" `
+    -Name "SettingsPageVisibility" `
+    -PropertyType String `
+    -Value "hide:regionlanguage;language;keyboard;speech" `
     -Force
 
 [gc]::Collect()
